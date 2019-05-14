@@ -1,3 +1,8 @@
+# 项目安装mobx 插件
+```
+npm i
+```
+
 # 用mobx做状态管理的 小星星游戏 Star Catcher 的 demo
 mobx 库介绍 https://cn.mobx.js.org/
 项目地址 https://github.com/oyb81076/cocos-mobx-tutorial
