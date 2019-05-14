@@ -6,7 +6,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 @observer
 export default class Player extends cc.Component {
-    @property(cc.AudioClip)
+    @property(cc.audioEngine)
     private jumpAudio = ''
 
     // 调用声音引擎播放声音
@@ -20,7 +20,7 @@ export default class Player extends cc.Component {
     @render 
     protected render() {
         if (this.enabled = store.playing) {
-            this.node.position = cc.p(0, store.groundY)
+            this.node.position = cc.v2(0, store.groundY)
             this.runJumpAction()
         } else {
             this.node.stopAllActions()
@@ -32,9 +32,9 @@ export default class Player extends cc.Component {
      */
     private runJumpAction(): void {
         // 跳跃上升
-        var jumpUp = cc.moveBy(store.jumpDuration, cc.p(0, store.jumpHeight)).easing(cc.easeCubicActionOut());
+        var jumpUp = cc.moveBy(store.jumpDuration, cc.v2(0, store.jumpHeight)).easing(cc.easeCubicActionOut());
         // 下落
-        var jumpDown = cc.moveBy(store.jumpDuration, cc.p(0, -store.jumpHeight)).easing(cc.easeCubicActionIn());
+        var jumpDown = cc.moveBy(store.jumpDuration, cc.v2(0, -store.jumpHeight)).easing(cc.easeCubicActionIn());
         // 形变
         var squash = cc.scaleTo(store.squashDuration, 1, 0.6);
         var stretch = cc.scaleTo(store.squashDuration, 1, 1.2);
@@ -48,9 +48,10 @@ export default class Player extends cc.Component {
     // 获取到star的距离
     private get playerDistance(): number {
         const { x, y, height } = this.node
-        const playerPos = cc.p(x, y + height / 2);
+        const playerPos = cc.v2(x, y + height / 2);
         // 根据两点位置计算两点之间距离
-        const dist = cc.pDistance(store.currStarPos, playerPos);
+        // const dist = cc.pDistance(store.currStarPos, playerPos);
+        const dist = store.currStarPos.sub(playerPos).mag()
         return dist;
     }
     // called every frame

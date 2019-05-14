@@ -31,12 +31,12 @@ export default class UserInput extends cc.Component {
 
     private handleKeyDown({ keyCode }: cc.Event.EventCustom) {
         switch (keyCode) {
-            case cc.KEY.a:
-            case cc.KEY.left:
+            case cc.macro.KEY.a:
+            case cc.macro.KEY.left:
                 this.accSide = LEFT
                 break;
-            case cc.KEY.d:
-            case cc.KEY.right:
+            case cc.macro.KEY.d:
+            case cc.macro.KEY.right:
                 this.accSide = RIGHT
                 break;
         }
@@ -44,10 +44,10 @@ export default class UserInput extends cc.Component {
 
     private handleKeyUp({ keyCode }: cc.Event.EventCustom) {
         switch (keyCode) {
-            case cc.KEY.a:
-            case cc.KEY.left:
-            case cc.KEY.d:
-            case cc.KEY.right:
+            case cc.macro.KEY.a:
+            case cc.macro.KEY.left:
+            case cc.macro.KEY.d:
+            case cc.macro.KEY.right:
                 this.accSide = NONE
         }
     }

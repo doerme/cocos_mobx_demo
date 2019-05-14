@@ -70,20 +70,20 @@ class Store {
     @observable public starX: number = 0
     @observable public starY: number = 0
     // 前一个星星的位置 (给ScoreFx用的)
-    public prevStarPos: cc.Vec2 = cc.p(0, 0)
-    public currStarPos: cc.Vec2 = cc.p(0, 0)
+    public prevStarPos: cc.Vec2 = cc.v2(0, 0)
+    public currStarPos: cc.Vec2 = cc.v2(0, 0)
     // 生成一个新的星星坐标
     public updateStarPos(): void {
         // 根据地平面位置和主角跳跃高度，随机得到一个星星的 y 坐标
-        const randY = this.groundY + cc.random0To1() * this.jumpHeight + 50;
+        const randY = this.groundY + Math.random() * this.jumpHeight + 50;
         // 根据屏幕宽度和上一个星星的 x 坐标，随机得到一个新生成星星 x 坐标
-        const randX = (this.starX > 0 ? -1 : 1) * cc.random0To1() * this.width / 2
+        const randX = (this.starX > 0 ? -1 : 1) * Math.random() * this.width / 2
         this.timer = 0
-        this.starDuration = store.minStarDuration + cc.random0To1() * (store.maxStarDuration - store.minStarDuration)
+        this.starDuration = store.minStarDuration + Math.random() * (store.maxStarDuration - store.minStarDuration)
         this.starX = randX
         this.starY = randY
         this.prevStarPos = this.currStarPos
-        this.currStarPos = cc.p(this.starX, this.starY)
+        this.currStarPos = cc.v2(this.starX, this.starY)
     }
 
     // 增加1分

@@ -28,7 +28,7 @@ export default class Game extends cc.Component {
     private scoreDisplay: cc.Label = null as any
 
     // 得分音效资源
-    @property(cc.AudioClip)
+    @property(cc.audioEngine)
     private scoreAudio: string = ''
 
     @property(cc.Node)
@@ -180,8 +180,8 @@ export default class NewScript extends cc.Component {
     scoreDisplay: cc.Label = null;
     
     // 得分音效资源
-    @property(cc.AudioClip)
-    scoreAudio: cc.AudioClip = null;
+    @property(cc.audioEngine)
+    scoreAudio: cc.audioEngine = null;
         
     @property(cc.Node)
     btnNode: cc.Node = null;
@@ -238,7 +238,7 @@ export default class NewScript extends cc.Component {
         this.btnNode.setPositionX(3000);
         this.gameOverNode.active = false;
         // reset player position and move speed
-        this.player.startMoveAt(cc.p(0, this.groundY));
+        this.player.startMoveAt(cc.v2(0, this.groundY));
         // spawn star
         this.spawnNewStar();
     }
@@ -272,7 +272,7 @@ export default class NewScript extends cc.Component {
 
     startTimer () {
         // get a life duration for next star
-        this.starDuration = this.minStarDuration + cc.random0To1() * (this.maxStarDuration - this.minStarDuration);
+        this.starDuration = this.minStarDuration + Math.random() * (this.maxStarDuration - this.minStarDuration);
         this.timer = 0;
     }
 
@@ -283,17 +283,17 @@ export default class NewScript extends cc.Component {
         }
         var randX = 0;
         // 根据地平面位置和主角跳跃高度，随机得到一个星星的 y 坐标
-        var randY = this.groundY + cc.random0To1() * this.player.jumpHeight + 50;
+        var randY = this.groundY + Math.random() * this.player.jumpHeight + 50;
         // 根据屏幕宽度和上一个星星的 x 坐标，随机得到一个新生成星星 x 坐标
         var maxX = this.node.width/2;
         if (this.currentStarX >= 0) {
-            randX = -cc.random0To1() * maxX;
+            randX = -Math.random() * maxX;
         } else {
-            randX = cc.random0To1() * maxX;
+            randX = Math.random() * maxX;
         }
         this.currentStarX = randX;
         // 返回星星坐标
-        return cc.p(randX, randY);
+        return cc.v2(randX, randY);
     }
 
     gainScore (pos) {

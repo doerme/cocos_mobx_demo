@@ -22,7 +22,7 @@ export default class Game extends cc.Component {
     private scoreDisplay: cc.Label = null as any
 
     // 得分音效资源
-    @property(cc.AudioClip)
+    @property(cc.audioEngine)
     private scoreAudio: string = ''
 
     @property(cc.Node)

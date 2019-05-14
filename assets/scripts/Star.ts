@@ -10,6 +10,6 @@ export default class Star extends cc.Component {
         this.node.active = store.playing
     }
     @render render() {
-        this.node.position = cc.p(store.starX, store.starY)
+        this.node.position = cc.v2(store.starX, store.starY)
     }
 }
